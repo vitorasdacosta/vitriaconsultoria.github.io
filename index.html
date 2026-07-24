@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vitria Consultoria - Engenharia e IA Aplicada</title>
+    
+    <!-- Fontes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@700;900&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        dark: '#000000', 
+                        panel: '#111111',
+                        silver: '#d4d4d8', 
+                        accent: '#ffffff',
+                        whatsapp: '#25D366', 
+                        'whatsapp-dark': '#128C7E', 
+                        ruler: '#3f3f46'
+                    },
+                    fontFamily: {
+                        heading: ['Montserrat', 'sans-serif'],
+                        body: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Ícones -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Estilos Personalizados -->
+    <style>
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+        .marquee-container { overflow: hidden; white-space: nowrap; width: 100%; display: flex; }
+        .marquee-track { display: flex; gap: 4rem; animation: marquee 25s linear infinite; }
+        @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+        @keyframes pulse-whatsapp { 0% { box-shadow: 0 0 0 0 rgba(37,211,102,0.7); } 70% { box-shadow: 0 0 0 15px transparent; } 100% { box-shadow: 0 0 0 0 transparent; } }
+        .whatsapp-pulse { animation: pulse-whatsapp 2s infinite; }
+        
+        /* Gradiente inspirado na logomarca */
+        .bg-logo-gradient {
+            background: linear-gradient(135deg, #000000 0%, #3a3a3a 100%);
+        }
+        .text-gradient {
+            background: linear-gradient(to right, #ffffff, #a1a1aa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="bg-dark text-silver selection:bg-accent selection:text-dark font-body">
+
+    <!-- Header -->
+    <header id="main-header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-dark/90 backdrop-blur-md py-5 border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-8 flex items-center justify-between">
+            <a href="#home" class="flex items-center gap-3">
+                <!-- Logomarca recriada via SVG sem "BPO" e "& Co." -->
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-white">
+                    <path d="M3 3v18h18" />
+                    <path d="M3 16l5-5 4 4 8-8" />
+                    <path d="M15 7h5v5" />
+                </svg>
+                <span class="font-heading font-bold text-white text-xl tracking-wider">VITRIA</span>
+            </a>
+            <nav class="hidden lg:flex items-center gap-2">
+                <a href="#home" class="px-4 py-2 text-sm font-medium text-silver hover:text-white transition-colors">Home</a>
+                <a href="#quem-somos" class="px-4 py-2 text-sm font-medium text-silver hover:text-white transition-colors">Sobre Nós</a>
+                <a href="#solucoes" class="px-4 py-2 text-sm font-medium text-silver hover:text-white transition-colors">Soluções em IA</a>
+                <a href="#portfolio" class="px-4 py-2 text-sm font-medium text-silver hover:text-white transition-colors">Inovações</a>
+                <a href="#informacoes" class="px-4 py-2 text-sm font-medium text-silver hover:text-white transition-colors">Contato</a>
+                <a href="https://wa.me/5521999999999" target="_blank" class="ml-4 bg-white hover:bg-silver text-dark font-bold text-sm px-6 py-2.5 rounded transition-colors">Fale com um Especialista</a>
+            </nav>
+            <button id="mobile-menu-btn" class="lg:hidden text-white p-2">
+                <i data-lucide="menu"></i>
+            </button>
+        </div>
+        <div id="mobile-menu" class="hidden lg:hidden bg-panel border-t border-ruler absolute top-full left-0 w-full">
+            <nav class="flex flex-col px-6 py-4 gap-1">
+                <a href="#home" class="mobile-link py-3 text-base font-medium text-silver border-b border-ruler">Home</a>
+                <a href="#quem-somos" class="mobile-link py-3 text-base font-medium text-silver border-b border-ruler">Sobre Nós</a>
+                <a href="#solucoes" class="mobile-link py-3 text-base font-medium text-silver border-b border-ruler">Soluções em IA</a>
+                <a href="#portfolio" class="mobile-link py-3 text-base font-medium text-silver border-b border-ruler">Inovações</a>
+                <a href="#informacoes" class="mobile-link py-3 text-base font-medium text-silver border-b border-ruler">Contato</a>
+                <a href="https://wa.me/5521999999999" target="_blank" class="mt-4 bg-white text-dark font-semibold text-center py-3 rounded">Fale no WhatsApp</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero -->
+        <section id="home" class="relative min-h-screen flex items-center overflow-hidden bg-logo-gradient">
+            <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2000')] opacity-10 bg-cover bg-center mix-blend-overlay"></div>
+            
+            <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-8 w-full pt-28 pb-20 lg:pt-0 lg:pb-0 reveal">
+                <div class="max-w-4xl">
+                    <div class="inline-flex items-center gap-2 bg-white/5 backdrop-blur-md border border-white/10 px-4 py-1.5 mb-6 rounded-sm">
+                        <div class="w-2 h-2 bg-accent rounded-full animate-pulse"></div>
+                        <span class="text-white text-xs font-semibold tracking-widest uppercase">INTELIGÊNCIA ARTIFICIAL E ENGENHARIA B2B</span>
+                    </div>
+                    <h1 class="font-heading font-black text-white text-4xl sm:text-5xl lg:text-7xl leading-[1.1] tracking-tight mb-6">
+                        Soluções digitais em <span class="text-gradient">IA Generativa</span> para Gestão de Projetos
+                    </h1>
+                    <div class="w-20 h-1 bg-white mb-6"></div>
+                    <p class="text-silver text-base sm:text-xl leading-relaxed mb-10 max-w-2xl">
+                        Unimos know-how técnico em engenharia e custos com inovações de software avançadas. Transforme dados em decisões precisas e estratégicas.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="https://wa.me/5521999999999" target="_blank" class="inline-flex items-center justify-center gap-3 bg-white hover:bg-silver text-dark font-bold text-base px-8 py-4 rounded transition-all shadow-lg">
+                            Agendar Consultoria
+                        </a>
+                        <a href="#solucoes" class="inline-flex items-center justify-center gap-2 border border-white/30 text-white hover:bg-white/10 font-semibold text-base px-8 py-4 rounded transition-all">
+                            Conhecer Nossas Soluções
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Efeito visual na borda inferior -->
+            <div class="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-dark to-transparent z-10"></div>
+        </section>
+
+        <!-- Quem Somos -->
+        <section id="quem-somos" class="py-24 lg:py-32 bg-dark relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-8">
+                <div class="grid lg:grid-cols-2 gap-16 items-center">
+                    <div class="reveal">
+                        <span class="text-white/50 font-semibold text-sm tracking-widest uppercase mb-4 block">Sobre a Consultoria</span>
+                        <h2 class="font-heading font-black text-white text-3xl sm:text-4xl lg:text-5xl leading-tight mb-6">Autoridade e inovação para o mercado B2B</h2>
+                        <div class="w-16 h-1 bg-white/20 mb-6"></div>
+                        <p class="text-silver text-base sm:text-lg leading-relaxed mb-6">
+                            A Vitria Consultoria nasce do profundo conhecimento técnico em Engenharia, Controle de Custos e Supply Chain, unindo décadas de expertise à fronteira da tecnologia digital.
+                        </p>
+                        <p class="text-silver text-base sm:text-lg leading-relaxed">
+                            Nosso propósito é desenvolver plataformas, automatizações e fluxos operacionais impulsionados por Inteligência Artificial, proporcionando previsibilidade e máxima eficiência operacional para indústrias e grandes projetos.
+                        </p>
+                    </div>
+                    <div class="grid gap-6 reveal">
+                        <div class="flex items-start gap-5 p-6 bg-panel rounded-lg border border-ruler">
+                            <div class="w-12 h-12 bg-white/5 rounded flex items-center justify-center shrink-0 border border-white/10"><i data-lucide="cpu" class="text-white"></i></div>
+                            <div>
+                                <h3 class="font-heading font-bold text-white text-lg mb-1">IA Generativa Aplicada</h3>
+                                <p class="text-silver/70 text-sm leading-relaxed">Automatização de relatórios, equalização de propostas e modelagem preditiva.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-5 p-6 bg-panel rounded-lg border border-ruler">
+                            <div class="w-12 h-12 bg-white/5 rounded flex items-center justify-center shrink-0 border border-white/10"><i data-lucide="calculator" class="text-white"></i></div>
+                            <div>
+                                <h3 class="font-heading font-bold text-white text-lg mb-1">Engenharia de Custos</h3>
+                                <p class="text-silver/70 text-sm leading-relaxed">Análise orçamentária rigorosa e rastreabilidade financeira em tempo real.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-5 p-6 bg-panel rounded-lg border border-ruler">
+                            <div class="w-12 h-12 bg-white/5 rounded flex items-center justify-center shrink-0 border border-white/10"><i data-lucide="line-chart" class="text-white"></i></div>
+                            <div>
+                                <h3 class="font-heading font-bold text-white text-lg mb-1">Planejamento e Gestão</h3>
+                                <p class="text-silver/70 text-sm leading-relaxed">Desenvolvimento de dashboards executivos e roteamento logístico inteligente.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Soluções / Áreas de Atuação -->
+        <section id="solucoes" class="py-24 lg:py-32 bg-panel border-t border-ruler">
+            <div class="max-w-7xl mx-auto px-4 sm:px-8">
+                <div class="text-center mb-16 reveal">
+                    <span class="text-white/50 font-semibold text-sm tracking-widest uppercase mb-4 block">Pilares Tecnológicos</span>
+                    <h2 class="font-heading font-black text-white text-3xl sm:text-4xl lg:text-5xl leading-tight mb-4">Soluções Digitais</h2>
+                    <p class="text-silver text-base max-w-2xl mx-auto">Sistemas e metodologias exclusivas para digitalizar a tomada de decisão no seu negócio.</p>
+                </div>
+
+                <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 reveal">
+                    <!-- Serv 1 -->
+                    <div class="bg-dark border border-ruler rounded-lg p-8 shadow-sm hover:border-white/40 transition-all hover:-translate-y-1 group">
+                        <div class="w-14 h-14 bg-panel border border-ruler rounded flex items-center justify-center mb-6 text-white group-hover:bg-white group-hover:text-dark transition-colors">
+                            <i data-lucide="code-2" stroke-width="2"></i>
+                        </div>
+                        <h3 class="font-heading font-bold text-white text-xl mb-3">Desenvolvimento de Software</h3>
+                        <p class="text-silver/70 text-sm leading-relaxed">Criação de aplicações customizadas para automação de cadeia de suprimentos e procurement.</p>
+                    </div>
+                    
+                    <!-- Serv 2 -->
+                    <div class="bg-dark border border-ruler rounded-lg p-8 shadow-sm hover:border-white/40 transition-all hover:-translate-y-1 group">
+                        <div class="w-14 h-14 bg-panel border border-ruler rounded flex items-center justify-center mb-6 text-white group-hover:bg-white group-hover:text-dark transition-colors">
+                            <i data-lucide="bar-chart-3" stroke-width="2"></i>
+                        </div>
+                        <h3 class="font-heading font-bold text-white text-xl mb-3">Dashboards Executivos</h3>
+                        <p class="text-silver/70 text-sm leading-relaxed">Visualização de métricas e KPIs de alta gestão integrados aos ERPs corporativos via API.</p>
+                    </div>
+
+                    <!-- Serv 3 -->
+                    <div class="bg-dark border border-ruler rounded-lg p-8 shadow-sm hover:border-white/40 transition-all hover:-translate-y-1 group">
+                        <div class="w-14 h-14 bg-panel border border-ruler rounded flex items-center justify-center mb-6 text-white group-hover:bg-white group-hover:text-dark transition-colors">
+                            <i data-lucide="bot" stroke-width="2"></i>
+                        </div>
+                        <h3 class="font-heading font-bold text-white text-xl mb-3">Assistentes Virtuais IA</h3>
+                        <p class="text-silver/70 text-sm leading-relaxed">Implantação de LLMs locais e assistentes para triagem de editais e análises técnicas.</p>
+                    </div>
+
+                    <!-- Serv 4 -->
+                    <div class="bg-dark border border-ruler rounded-lg p-8 shadow-sm hover:border-white/40 transition-all hover:-translate-y-1 group">
+                        <div class="w-14 h-14 bg-panel border border-ruler rounded flex items-center justify-center mb-6 text-white group-hover:bg-white group-hover:text-dark transition-colors">
+                            <i data-lucide="workflow" stroke-width="2"></i>
+                        </div>
+                        <h3 class="font-heading font-bold text-white text-xl mb-3">Otimização de Processos</h3>
+                        <p class="text-silver/70 text-sm leading-relaxed">Mapeamento e reestruturação de fluxos (BPO) com integração nativa às novas ferramentas.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Portfolio/Cases -->
+        <section id="portfolio" class="py-24 lg:py-32 bg-dark">
+            <div class="max-w-7xl mx-auto px-4 sm:px-8">
+                <div class="text-center mb-16 reveal">
+                    <span class="text-white/50 font-semibold text-sm tracking-widest uppercase mb-4 block">Inovações</span>
+                    <h2 class="font-heading font-black text-white text-3xl sm:text-4xl lg:text-5xl leading-tight mb-4">Aplicações Práticas</h2>
+                    <p class="text-silver/70 text-base max-w-2xl mx-auto">Exemplos de como nossa expertise converte desafios operacionais em sistemas fluidos e escaláveis.</p>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 reveal">
+                    <!-- Case 1 -->
+                    <div class="bg-panel border border-ruler rounded-lg overflow-hidden shadow-sm hover:border-white/30 transition-all flex flex-col group">
+                        <div class="relative aspect-[4/3] w-full overflow-hidden bg-black flex items-center justify-center">
+                            <i data-lucide="network" class="text-white/10 w-32 h-32 absolute"></i>
+                            <div class="z-10 p-6 text-center">
+                                <h4 class="font-heading font-black text-white text-2xl tracking-widest opacity-80 group-hover:opacity-100 transition-opacity">PROCURE FLOW</h4>
+                            </div>
+                        </div>
+                        <div class="p-6 flex-1 flex flex-col">
+                            <div class="w-12 h-1 mb-4 bg-white/20"></div>
+                            <h3 class="font-heading font-bold text-white text-xl mb-3">Automação de Supply Chain</h3>
+                            <p class="text-silver/70 text-sm leading-relaxed mb-5 flex-1">Plataforma desenvolvida para gerenciar o ciclo de vida de requisições de compras, matriz de fornecedores e equalização técnica.</p>
+                            <div class="space-y-2 pt-4 border-t border-ruler">
+                                <div class="flex gap-2 items-start"><span class="text-white text-xs mt-0.5 font-bold">▸</span><span class="text-silver/80 text-xs">Roteamento Automatizado</span></div>
+                                <div class="flex gap-2 items-start"><span class="text-white text-xs mt-0.5 font-bold">▸</span><span class="text-silver/80 text-xs">Gestão Kanban</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Case 2 -->
+                    <div class="bg-panel border border-ruler rounded-lg overflow-hidden shadow-sm hover:border-white/30 transition-all flex flex-col group">
+                        <div class="relative aspect-[4/3] w-full overflow-hidden bg-black flex items-center justify-center">
+                            <i data-lucide="database-zap" class="text-white/10 w-32 h-32 absolute"></i>
+                            <div class="z-10 p-6 text-center">
+                                <h4 class="font-heading font-black text-white text-2xl tracking-widest opacity-80 group-hover:opacity-100 transition-opacity">COST AI</h4>
+                            </div>
+                        </div>
+                        <div class="p-6 flex-1 flex flex-col">
+                            <div class="w-12 h-1 mb-4 bg-white/20"></div>
+                            <h3 class="font-heading font-bold text-white text-xl mb-3">Engenharia de Custos Preditiva</h3>
+                            <p class="text-silver/70 text-sm leading-relaxed mb-5 flex-1">Algoritmos focados na estimativa de custos de obras e paradas de manutenção industrial com alta precisão.</p>
+                            <div class="space-y-2 pt-4 border-t border-ruler">
+                                <div class="flex gap-2 items-start"><span class="text-white text-xs mt-0.5 font-bold">▸</span><span class="text-silver/80 text-xs">Análise de Desvios</span></div>
+                                <div class="flex gap-2 items-start"><span class="text-white text-xs mt-0.5 font-bold">▸</span><span class="text-silver/80 text-xs">Orçamentação Ágil</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Case 3 -->
+                    <div class="bg-panel border border-ruler rounded-lg overflow-hidden shadow-sm hover:border-white/30 transition-all flex flex-col group">
+                        <div class="relative aspect-[4/3] w-full overflow-hidden bg-black flex items-center justify-center">
+                            <i data-lucide="layout-dashboard" class="text-white/10 w-32 h-32 absolute"></i>
+                            <div class="z-10 p-6 text-center">
+                                <h4 class="font-heading font-black text-white text-2xl tracking-widest opacity-80 group-hover:opacity-100 transition-opacity">DATA VISION</h4>
+                            </div>
+                        </div>
+                        <div class="p-6 flex-1 flex flex-col">
+                            <div class="w-12 h-1 mb-4 bg-white/20"></div>
+                            <h3 class="font-heading font-bold text-white text-xl mb-3">Dashboards de Diretoria</h3>
+                            <p class="text-silver/70 text-sm leading-relaxed mb-5 flex-1">Ambientes analíticos desenvolvidos para estruturar a apresentação de KPIs e viabilizar apresentações corporativas de nível executivo.</p>
+                            <div class="space-y-2 pt-4 border-t border-ruler">
+                                <div class="flex gap-2 items-start"><span class="text-white text-xs mt-0.5 font-bold">▸</span><span class="text-silver/80 text-xs">Integração de APIs</span></div>
+                                <div class="flex gap-2 items-start"><span class="text-white text-xs mt-0.5 font-bold">▸</span><span class="text-silver/80 text-xs">Relatórios Dinâmicos</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contato -->
+        <section id="informacoes" class="py-24 lg:py-32 bg-logo-gradient">
+            <div class="max-w-7xl mx-auto px-4 sm:px-8">
+                <div class="grid lg:grid-cols-2 gap-12 items-center reveal">
+                    <div class="text-white">
+                        <span class="text-white/50 font-semibold text-sm tracking-widest uppercase mb-4 block">Transformação Digital</span>
+                        <h2 class="font-heading font-black text-3xl sm:text-4xl lg:text-5xl leading-tight mb-6">Pronto para inovar sua gestão?</h2>
+                        <p class="text-silver/80 text-base leading-relaxed mb-10 max-w-md">Entre em contato para discutirmos como o desenvolvimento de software e a IA podem escalar a eficiência da sua engenharia e setor de compras.</p>
+                        
+                        <div class="space-y-6">
+                            <a href="mailto:contato@vitriaconsultoria.com.br" class="flex items-center gap-4 group">
+                                <div class="w-12 h-12 bg-white/10 border border-white/20 rounded flex items-center justify-center"><i data-lucide="mail" class="text-white"></i></div>
+                                <div>
+                                    <p class="text-white/50 font-heading text-[11px] uppercase tracking-widest mb-1">E-mail Comercial</p>
+                                    <p class="font-body text-sm group-hover:text-silver transition-colors">contato@vitriaconsultoria.com.br</p>
+                                </div>
+                            </a>
+                            <a href="https://linkedin.com" target="_blank" class="flex items-center gap-4 group">
+                                <div class="w-12 h-12 bg-white/10 border border-white/20 rounded flex items-center justify-center"><i data-lucide="linkedin" class="text-white"></i></div>
+                                <div>
+                                    <p class="text-white/50 font-heading text-[11px] uppercase tracking-widest mb-1">Rede Profissional</p>
+                                    <p class="font-body text-sm group-hover:text-silver transition-colors">Vitria Consultoria</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-panel border border-ruler rounded-lg p-8 shadow-2xl">
+                        <div class="flex items-center gap-2 mb-6">
+                            <i data-lucide="message-square" class="text-white"></i>
+                            <h3 class="font-heading font-bold text-white text-2xl">Fale com um Especialista</h3>
+                        </div>
+                        <form onsubmit="enviarWhatsApp(event)" class="space-y-5">
+                            <div class="grid sm:grid-cols-2 gap-5">
+                                <div>
+                                    <label class="block text-silver/70 font-heading text-xs font-bold uppercase mb-2">Nome / Empresa</label>
+                                    <input type="text" id="form-nome" required class="w-full border border-ruler rounded bg-dark px-4 py-3 text-sm text-white outline-none focus:border-white transition-colors">
+                                </div>
+                                <div>
+                                    <label class="block text-silver/70 font-heading text-xs font-bold uppercase mb-2">Telefone / WhatsApp</label>
+                                    <input type="tel" id="form-tel" required class="w-full border border-ruler rounded bg-dark px-4 py-3 text-sm text-white outline-none focus:border-white transition-colors">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-silver/70 font-heading text-xs font-bold uppercase mb-2">E-mail Corporativo</label>
+                                <input type="email" id="form-email" required class="w-full border border-ruler rounded bg-dark px-4 py-3 text-sm text-white outline-none focus:border-white transition-colors">
+                            </div>
+                            <div>
+                                <label class="block text-silver/70 font-heading text-xs font-bold uppercase mb-2">Qual é o seu desafio técnico?</label>
+                                <textarea id="form-escopo" rows="4" required class="w-full border border-ruler rounded bg-dark px-4 py-3 text-sm text-white outline-none focus:border-white transition-colors resize-none"></textarea>
+                            </div>
+                            <button type="submit" id="btn-submit" class="w-full bg-white hover:bg-silver text-dark font-heading font-black text-lg py-4 rounded transition-all shadow-lg">
+                                Iniciar Conversa
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark border-t border-white/10 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-8">
+            <div class="grid sm:grid-cols-3 gap-8 mb-10">
+                <div>
+                    <div class="flex items-center gap-2 mb-4">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-white">
+                            <path d="M3 3v18h18" />
+                            <path d="M3 16l5-5 4 4 8-8" />
+                            <path d="M15 7h5v5" />
+                        </svg>
+                        <span class="font-heading font-bold text-white text-lg tracking-wider">VITRIA</span>
+                    </div>
+                    <p class="text-silver/50 text-sm leading-relaxed">Consultoria especializada em Inteligência Artificial e desenvolvimento de soluções digitais para Engenharia, Planejamento e Gestão B2B.</p>
+                </div>
+                <div>
+                    <h4 class="font-heading font-bold text-white text-sm mb-4">Acesso Rápido</h4>
+                    <div class="space-y-2">
+                        <a href="#home" class="block text-silver/50 hover:text-white text-sm transition-colors">Home</a>
+                        <a href="#quem-somos" class="block text-silver/50 hover:text-white text-sm transition-colors">Sobre Nós</a>
+                        <a href="#solucoes" class="block text-silver/50 hover:text-white text-sm transition-colors">Soluções</a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-heading font-bold text-white text-sm mb-4">Contato</h4>
+                    <a href="mailto:contato@vitriaconsultoria.com.br" class="block text-silver/50 hover:text-white text-sm mb-2 transition-colors">contato@vitriaconsultoria.com.br</a>
+                    <p class="text-silver/50 text-sm">Rio de Janeiro — RJ</p>
+                </div>
+            </div>
+            <div class="border-t border-white/5 pt-6 text-silver/30 text-xs text-center flex flex-col sm:flex-row justify-between items-center gap-4">
+                <p>&copy; 2026 Vitria Consultoria. Todos os direitos reservados.</p>
+                <p>Tecnologia e Inovação Aplicada.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts de Interatividade -->
+    <script>
+        lucide.createIcons();
+
+        const btnMenu = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+        btnMenu.addEventListener('click', () => menu.classList.toggle('hidden'));
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => menu.classList.add('hidden'));
+        });
+
+        const header = document.getElementById('main-header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 40) {
+                header.classList.add('bg-dark/95', 'shadow-2xl');
+                header.classList.remove('bg-dark/90');
+            } else {
+                header.classList.add('bg-dark/90');
+                header.classList.remove('bg-dark/95', 'shadow-2xl');
+            }
+        });
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("visible");
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.12 });
+        document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+
+        function enviarWhatsApp(event) {
+            event.preventDefault();
+            const nome = document.getElementById('form-nome').value;
+            const tel = document.getElementById('form-tel').value;
+            const email = document.getElementById('form-email').value;
+            const escopo = document.getElementById('form-escopo').value;
+            
+            const btn = document.getElementById('btn-submit');
+            btn.innerText = "Processando...";
+
+            const msg = encodeURIComponent(`Olá! Sou ${nome}.
+Tel: ${tel}
+E-mail: ${email}
+
+Desafio/Escopo:
+${escopo}`);
+            // Insira o número real de WhatsApp da Vitria Consultoria abaixo, substituindo o 5521999999999
+            window.open(`https://wa.me/5521999999999?text=${msg}`, "_blank");
+            
+            setTimeout(() => { btn.innerText = "Iniciar Conversa"; }, 4000);
+        }
+    </script>
+</body>
+</html>
