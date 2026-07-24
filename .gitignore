@@ -1,0 +1,54 @@
+# Sistema Operacional
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# IDEs e Editores
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.code-workspace
+.vim/
+
+# Node.js (se usar algum builder/bundler)
+node_modules/
+npm-debug.log
+yarn-error.log
+dist/
+build/
+
+# Arquivos temporários
+*.tmp
+*.temp
+temp/
+
+# Arquivos locais de trabalho
+.env
+.env.local
+local/
+scratch/
+
+# Backups e versões antigas
+*.bak
+*.backup
+*-old
+*-backup
+
+# Office (drafts locais)
+~$*.doc
+~$*.docx
+~$*.xls
+~$*.xlsx
+.~lock.*
+
+# Logs
+*.log
+logs/
+
+# OSX
+.AppleDouble
+.LSOverride
+._*
